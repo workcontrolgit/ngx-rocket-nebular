@@ -15,6 +15,8 @@ import {
   NbSidebarModule,
   NbThemeModule,
   NbActionsModule,
+  NbUserModule,
+  NbContextMenuModule,
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -30,6 +32,8 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbLayoutModule,
     NbEvaIconsModule,
     NbActionsModule,
+    NbUserModule,
+    NbContextMenuModule,
     AuthModule,
     I18nModule,
     RouterModule,

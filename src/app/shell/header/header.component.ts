@@ -1,34 +1,51 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 
-import { AuthenticationService, CredentialsService } from '@app/auth';
+import { UserData } from '@core/data/users';
+import { map, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-header',
-  templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  templateUrl: './header.component.html',
 })
-export class HeaderComponent implements OnInit {
-  menuHidden = true;
+export class HeaderComponent implements OnInit, OnDestroy {
+  private destroy$: Subject<void> = new Subject<void>();
+  userPictureOnly: boolean = false;
+  user: any;
+
+  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
 
   constructor(
-    private router: Router,
-    private authenticationService: AuthenticationService,
-    private credentialsService: CredentialsService
+    private sidebarService: NbSidebarService,
+    private menuService: NbMenuService,
+    private themeService: NbThemeService,
+    private userService: UserData,
+    // private layoutService: LayoutService,
+    private breakpointService: NbMediaBreakpointsService
   ) {}
 
-  ngOnInit() {}
-
-  toggleMenu() {
-    this.menuHidden = !this.menuHidden;
+  ngOnInit() {
+    this.userService
+      .getUsers()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((users: any) => (this.user = users.nick));
   }
 
-  logout() {
-    this.authenticationService.logout().subscribe(() => this.router.navigate(['/login'], { replaceUrl: true }));
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
-  get username(): string | null {
-    const credentials = this.credentialsService.credentials;
-    return credentials ? credentials.username : null;
+  toggleSidebar(): boolean {
+    this.sidebarService.toggle(true, 'menu-sidebar');
+
+    return false;
+  }
+
+  navigateHome() {
+    this.menuService.navigateHome();
+    return false;
   }
 }
