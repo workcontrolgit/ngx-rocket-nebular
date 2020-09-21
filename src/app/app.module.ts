@@ -26,9 +26,12 @@ export function configureAuth(oidcConfigService: OidcConfigService) {
       clientId: 'devkit-clients-spa.pkce',
       scope: 'openid profile email roles app.api.employeeprofile.read',
       responseType: 'code',
+      // startCheckSession: true,
       silentRenew: true,
       silentRenewUrl: '${window.location.origin}/silent-renew.html',
       useRefreshToken: false,
+      postLoginRoute: '/home',
+      logLevel: 3,
     });
 }
 @NgModule({

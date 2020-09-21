@@ -4,6 +4,7 @@ import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeServ
 import { UserData } from '@core/data/users';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-header',
@@ -23,7 +24,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private themeService: NbThemeService,
     private userService: UserData,
     // private layoutService: LayoutService,
-    private breakpointService: NbMediaBreakpointsService
+    private breakpointService: NbMediaBreakpointsService,
+    private authservice: AuthService
   ) {}
 
   ngOnInit() {
@@ -31,8 +33,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .getUsers()
       .pipe(takeUntil(this.destroy$))
       .subscribe((users: any) => (this.user = users.nick));
+    this.menuService.onItemClick().subscribe((event) => {
+      this.onItemSelection(event.item.title);
+    });
   }
 
+  onItemSelection(title: any) {
+    if (title === 'Log out') {
+      // Do something on Log out
+      this.authservice.signOut();
+      //console.log('Log out Clicked ')
+    } else if (title === 'Profile') {
+      // Do something on Profile
+      console.log('Profile Clicked ');
+    }
+  }
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
@@ -47,5 +62,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   navigateHome() {
     this.menuService.navigateHome();
     return false;
+  }
+
+  logout() {
+    this.authservice.signOut();
   }
 }
