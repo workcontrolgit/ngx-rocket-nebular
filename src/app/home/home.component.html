@@ -19,7 +19,10 @@
     {{ accessToken$ }}
 
     <br />
-
-    <button class="btn btn-primary" (click)="callAPI()">Call API</button>
   </div>
+
+  <button class="btn btn-primary" (click)="callapi()">Call API</button>
+  <pre>
+    {{ secretData$ | async | json }}
+  </pre>
 </div>

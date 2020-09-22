@@ -15,7 +15,6 @@ import { ShellModule } from './shell/shell.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule, OidcConfigService } from 'angular-auth-oidc-client';
-import { AuthInterceptor } from './auth.interceptor';
 
 export function configureAuth(oidcConfigService: OidcConfigService) {
   return () =>
@@ -26,11 +25,10 @@ export function configureAuth(oidcConfigService: OidcConfigService) {
       clientId: 'devkit-clients-spa.pkce',
       scope: 'openid profile email roles app.api.employeeprofile.read',
       responseType: 'code',
-      // startCheckSession: true,
       silentRenew: true,
       silentRenewUrl: '${window.location.origin}/silent-renew.html',
       useRefreshToken: false,
-      postLoginRoute: '/home',
+      postLoginRoute: window.location.origin + '/home',
       logLevel: 3,
     });
 }
@@ -56,11 +54,6 @@ export function configureAuth(oidcConfigService: OidcConfigService) {
       provide: APP_INITIALIZER,
       useFactory: configureAuth,
       deps: [OidcConfigService],
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
       multi: true,
     },
   ],

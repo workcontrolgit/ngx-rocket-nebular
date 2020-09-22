@@ -3,7 +3,7 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 
 import { Logger } from '@core';
 import { CredentialsService } from './credentials.service';
-import { AuthService } from '../auth.service';
+import { AuthService } from './auth.service';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';

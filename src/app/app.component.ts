@@ -9,7 +9,7 @@ import { environment } from '@env/environment';
 import { Logger, untilDestroyed } from '@core';
 import { I18nService } from '@app/i18n';
 
-import { AuthService } from './auth.service';
+import { AuthService } from './auth/auth.service';
 
 const log = new Logger('App');
 

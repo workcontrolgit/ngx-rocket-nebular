@@ -3,8 +3,13 @@ import { finalize } from 'rxjs/operators';
 
 import { QuoteService } from './quote.service';
 
-import { AuthService } from '../auth.service';
+import { AuthService } from '../auth/auth.service';
 import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Logger } from '@core';
+
+const log = new Logger('Home');
 
 @Component({
   selector: 'app-home',
@@ -19,7 +24,7 @@ export class HomeComponent implements OnInit {
   secretData$: Observable<any>;
   isAuthenticated$: Observable<boolean>;
 
-  constructor(private quoteService: QuoteService, private authservice: AuthService) {}
+  constructor(private quoteService: QuoteService, private authservice: AuthService, private httpClient: HttpClient) {}
 
   ngOnInit() {
     this.isLoading = true;
@@ -38,7 +43,11 @@ export class HomeComponent implements OnInit {
     this.isAuthenticated$ = this.authservice.isLoggedIn;
   }
 
-  callAPI() {
-    this.authservice.doLogin();
+  callapi() {
+    log.debug('callapi');
+    this.secretData$ = this.httpClient
+      .get('https://devkit-api-employeeprofile.azurewebsites.net/api/v1/Persons')
+      .pipe(catchError((error) => of(error)));
+    log.debug(this.secretData$);
   }
 }
