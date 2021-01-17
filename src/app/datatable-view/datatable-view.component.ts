@@ -33,7 +33,7 @@ export class DatatableViewComponent implements OnInit {
       pageLength: 10,
       serverSide: true,
       processing: true,
-      searching: false,
+      searching: true,
       ajax: (dataTablesParameters: any, callback) => {
         dataTablesParameters.searchCriteria = this.searchCriteria;
         this.appService.getAllEmployeesWithPaging(dataTablesParameters).subscribe((resp) => {

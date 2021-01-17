@@ -6,6 +6,7 @@ import { finalize } from 'rxjs/operators';
 import { environment } from '@env/environment';
 import { Logger, untilDestroyed } from '@core';
 import { AuthenticationService } from './authentication.service';
+import { AuthService } from './auth.service';
 
 const log = new Logger('Login');
 
@@ -24,12 +25,19 @@ export class LoginComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private authService: AuthService
   ) {
     this.createForm();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    //await this.authService.login();
+  }
+
+  // async ngOnInit() {
+  //   await this.authService.login();
+  // }
 
   ngOnDestroy() {}
 
