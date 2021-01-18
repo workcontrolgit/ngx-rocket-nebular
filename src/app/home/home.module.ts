@@ -6,13 +6,9 @@ import { CoreModule } from '@core';
 import { SharedModule } from '@shared';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
-import { DatatableViewComponent } from '../datatable-view/datatable-view.component';
-import { FormsModule } from '@angular/forms';
-import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
-  imports: [CommonModule, TranslateModule, CoreModule, SharedModule, HomeRoutingModule, FormsModule, DataTablesModule],
-  declarations: [HomeComponent, DatatableViewComponent],
-  providers: [],
+  imports: [CommonModule, TranslateModule, CoreModule, SharedModule, HomeRoutingModule],
+  declarations: [HomeComponent],
 })
 export class HomeModule {}

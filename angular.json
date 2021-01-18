@@ -24,10 +24,12 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
+              "src/silent-renew.html",
               "src/favicon.ico",
               "src/apple-touch-icon.png",
               "src/robots.txt",
               "src/manifest.json",
+              "src/web.config",
               "src/assets"
             ],
             "styles": [

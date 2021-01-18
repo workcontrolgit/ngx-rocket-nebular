@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
 import { User } from '../models/user';
 import { SearchCriteria } from '../models/search-criteria';
 import { Subject, Observable, Subscription } from 'rxjs';
@@ -11,7 +11,7 @@ import { timer } from 'rxjs';
   templateUrl: './datatable-view.component.html',
   styleUrls: ['./datatable-view.component.css'],
 })
-export class DatatableViewComponent implements OnInit {
+export class DatatableViewComponent implements OnInit, AfterViewInit, OnDestroy {
   title = 'app';
   users: User[];
   userName: string;

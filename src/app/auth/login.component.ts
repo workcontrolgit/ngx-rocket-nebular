@@ -1,13 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { finalize } from 'rxjs/operators';
 
 import { environment } from '@env/environment';
-import { Logger, untilDestroyed } from '@core';
-import { AuthenticationService } from './authentication.service';
-import { AuthService } from './auth.service';
+import { Logger } from '@core';
 
+import { AuthService } from '@app/auth';
 const log = new Logger('Login');
 
 @Component({
@@ -18,57 +14,15 @@ const log = new Logger('Login');
 export class LoginComponent implements OnInit, OnDestroy {
   version: string | null = environment.version;
   error: string | undefined;
-  loginForm!: FormGroup;
-  isLoading = false;
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
-    private authenticationService: AuthenticationService,
-    private authService: AuthService
-  ) {
-    this.createForm();
-  }
+  constructor(private authservice: AuthService) {}
 
-  ngOnInit() {
-    //await this.authService.login();
-  }
-
-  // async ngOnInit() {
-  //   await this.authService.login();
-  // }
+  ngOnInit() {}
 
   ngOnDestroy() {}
 
   login() {
-    this.isLoading = true;
-    const login$ = this.authenticationService.login(this.loginForm.value);
-    login$
-      .pipe(
-        finalize(() => {
-          this.loginForm.markAsPristine();
-          this.isLoading = false;
-        }),
-        untilDestroyed(this)
-      )
-      .subscribe(
-        (credentials) => {
-          log.debug(`${credentials.username} successfully logged in`);
-          this.router.navigate([this.route.snapshot.queryParams.redirect || '/'], { replaceUrl: true });
-        },
-        (error) => {
-          log.debug(`Login error: ${error}`);
-          this.error = error;
-        }
-      );
-  }
-
-  private createForm() {
-    this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      remember: true,
-    });
+    log.debug('doLogin');
+    this.authservice.doLogin();
   }
 }
