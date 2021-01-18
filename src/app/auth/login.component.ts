@@ -3,8 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { environment } from '@env/environment';
 import { Logger } from '@core';
 
-import { AuthService } from './auth.service';
-
+import { AuthService } from '@app/auth';
 const log = new Logger('Login');
 
 @Component({
