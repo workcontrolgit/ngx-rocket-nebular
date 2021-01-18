@@ -1,0 +1,15 @@
+.no-data-available {
+  text-align: center;
+}
+
+.ngHide {
+  display: none;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.nounderline {
+  text-decoration: none !important;
+}

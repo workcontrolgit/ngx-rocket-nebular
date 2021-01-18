@@ -9,12 +9,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '@env/environment';
 import { CoreModule } from '@core';
 import { SharedModule } from '@shared';
-//import { AuthModule } from '@app/auth';
 import { HomeModule } from './home/home.module';
 import { ShellModule } from './shell/shell.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule, OidcConfigService } from 'angular-auth-oidc-client';
+
+import { AppService } from './app.service';
 
 export function configureAuth(oidcConfigService: OidcConfigService) {
   return () =>
@@ -49,6 +50,7 @@ export function configureAuth(oidcConfigService: OidcConfigService) {
   ],
   declarations: [AppComponent],
   providers: [
+    AppService,
     OidcConfigService,
     {
       provide: APP_INITIALIZER,
