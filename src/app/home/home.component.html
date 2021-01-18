@@ -1,4 +1,6 @@
 <div class="container-fluid">
+  <!-- <app-datatable-view></app-datatable-view> -->
+
   <div class="jumbotron text-center">
     <h1>
       <img class="logo" src="assets/ngx-rocket-logo.png" alt="angular logo" />
@@ -7,4 +9,22 @@
     <app-loader [isLoading]="isLoading"></app-loader>
     <q [hidden]="isLoading">{{ quote }}</q>
   </div>
+  <div *ngIf="isAuthenticated$ | async as isAuthenticated">
+    Is Authenticated: {{ isAuthenticated }}
+
+    <br />
+    userData
+    <pre>{{ userData$ | async | json }}</pre>
+
+    <br />
+    accessToken
+    {{ accessToken$ }}
+
+    <br />
+  </div>
+
+  <button class="btn btn-primary" (click)="callapi()">Call API</button>
+  <pre>
+    {{ secretData$ | async | json }}
+  </pre>
 </div>

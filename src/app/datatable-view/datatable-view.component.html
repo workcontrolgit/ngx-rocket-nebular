@@ -1,0 +1,51 @@
+<br />
+<div class="container">
+  <h1>People Search</h1>
+  <br />
+  <hr />
+  <div>
+    <div class="form-group">
+      <label for="userName" class="control-label">Name</label>
+      <input type="text" (keyup)="search()" class="form-control" id="userName" name="userName" [(ngModel)]="userName" />
+    </div>
+  </div>
+  <!-- <blockquote>Please click on a row</blockquote>
+  <p class="text-danger">You clicked on: <strong>{{ message }}</strong></p>
+  <br />   -->
+  <br />
+  <div [class.ngHide]="searchCriteria.isPageLoad">
+    <table datatable class="table table-hover" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>Name</td>
+          <td>Email</td>
+          <td>Company</td>
+          <td>Contact Number</td>
+          <!-- <td>Action</td> -->
+        </tr>
+      </thead>
+      <tbody *ngIf="users != null || users?.length != 0">
+        <tr *ngFor="let user of users">
+          <td class="clickable">
+            <a class="nounderline" [routerLink]="['/user']" [queryParams]="{ id: user.ID }">
+              {{ user.ID }}
+            </a>
+          </td>
+          <td>{{ user.Name }}</td>
+          <td>{{ user.Email }}</td>
+          <td>{{ user.Company }}</td>
+          <td>{{ user.ContactNumber }}</td>
+          <!-- <td>View</td> -->
+        </tr>
+      </tbody>
+      <tbody *ngIf="users == null || users?.length == 0">
+        <tr>
+          <td colspan="5" class="no-data-available">No data!</td>
+        </tr>
+      </tbody>
+
+      <tbody></tbody>
+    </table>
+  </div>
+</div>

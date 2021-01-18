@@ -1,0 +1,5 @@
+{
+  "appService.zipIgnorePattern": ["node_modules{,/**}", ".vscode{,/**}"],
+  "appService.defaultWebAppToDeploy": "/subscriptions/924eda9f-8a8d-4c64-b7bb-b06482736fa6/resourceGroups/CorpRG/providers/Microsoft.Web/sites/starterkit-ui",
+  "appService.deploySubpath": "dist"
+}

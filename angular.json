@@ -24,14 +24,20 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
+              "src/silent-renew.html",
               "src/favicon.ico",
               "src/apple-touch-icon.png",
               "src/robots.txt",
               "src/manifest.json",
+              "src/web.config",
               "src/assets"
             ],
-            "styles": ["src/main.scss"],
-            "scripts": []
+            "styles": [
+              "src/main.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/datatables.net-dt/css/jquery.dataTables.css"
+            ],
+            "scripts": ["node_modules/jquery/dist/jquery.js", "node_modules/datatables.net/js/jquery.dataTables.js"]
           },
           "configurations": {
             "production": {
