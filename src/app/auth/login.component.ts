@@ -18,13 +18,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(private authservice: AuthService) {}
 
-  ngOnInit() {
-    //await this.authService.login();
-  }
-
-  // async ngOnInit() {
-  //   await this.authService.login();
-  // }
+  ngOnInit() {}
 
   ngOnDestroy() {}
 
