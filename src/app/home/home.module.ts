@@ -8,7 +8,8 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 
 @NgModule({
-  imports: [CommonModule, TranslateModule, CoreModule, SharedModule, HomeRoutingModule],
-  declarations: [HomeComponent],
+  imports: [CommonModule, TranslateModule, CoreModule, SharedModule, HomeRoutingModule, FormsModule, DataTablesModule],
+  declarations: [HomeComponent, DatatableViewComponent],
+  providers: [],
 })
 export class HomeModule {}
